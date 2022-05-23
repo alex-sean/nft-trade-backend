@@ -70,7 +70,30 @@ function isValidBlogListParams(params) {
     return true;
 }
 
+function getDeleteBlogParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidDeleteBlogParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidDeleteBlogParams(params) {
+    if (!params.id) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getRegisterBlogParams,
-    getBlogListParams
+    getBlogListParams,
+    getDeleteBlogParams
 }

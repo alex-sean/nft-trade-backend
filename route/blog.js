@@ -1,7 +1,8 @@
 const { responseInvalid, response } = require('./base');
 const { 
     getRegisterBlogParams,
-    getBlogListParams
+    getBlogListParams,
+    getDeleteBlogParams
 } = require('./request/blog');
 const { verifyJWT } = require('./base');
 const BlogController = require('../controller/blog');
@@ -57,6 +58,35 @@ function registerRoutes(app) {
             response({
                 status: CONST.RES_CODE.SUCCESS,
                 data: result
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.delete('/blog/delete', async (req, res) => {
+        try {
+            const params = getDeleteBlogParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            if (!await verifyJWT(req, res)) {
+                return;
+            }
+
+            const result = await BlogController.deleteBlog(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
             }, res);
         } catch (err) {
             response({

@@ -31,7 +31,16 @@ async function getBlogList(params) {
     }
 }
 
+async function deleteBlog(params) {
+    try {
+        return await BlogModel.deleteById(params.id);
+    } catch (err) {
+        return false;
+    }
+}
+
 module.exports = {
     addBlog,
-    getBlogList
+    getBlogList,
+    deleteBlog
 }

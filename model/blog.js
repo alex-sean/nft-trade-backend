@@ -121,10 +121,10 @@ async function deleteById(id) {
         connection = await Base.connect();
         const res = await Base.mysqlFetch(connection, query);
         await connection.release();
-        return res;
+        return true;
     } catch (ex) {
         Base.onConnectionErr(connection, ex.errno);
-        return null;
+        return false;
     }
 }
 
