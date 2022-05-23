@@ -1,17 +1,17 @@
 const { responseInvalid, response } = require('./base');
 const { 
-    getRegisterBlogParams,
-    getBlogListParams,
-    getDeleteBlogParams
-} = require('./request/blog');
+    getRegisterPartnerParams,
+    getPartnerListParams,
+    getDeletePartnerParams
+} = require('./request/partner');
 const { verifyJWT } = require('./base');
-const BlogController = require('../controller/blog');
+const PartnerController = require('../controller/partner');
 const CONST = require('../common/const');
 
 function registerRoutes(app) {
-    app.post('/blog/add', async (req, res) => {
+    app.post('/partner/add', async (req, res) => {
         try {
-            const params = getRegisterBlogParams(req);
+            const params = getRegisterPartnerParams(req);
 
             if (!params) {
                 responseInvalid(res);
@@ -22,7 +22,7 @@ function registerRoutes(app) {
                 return;
             }
 
-            if (await BlogController.addBlog(params)) {
+            if (await PartnerController.addPartner(params)) {
                 response({
                     status: CONST.RES_CODE.SUCCESS
                 }, res);
@@ -37,16 +37,16 @@ function registerRoutes(app) {
         }
     })
 
-    app.get('/blog/list', async (req, res) => {
+    app.get('/partner/list', async (req, res) => {
         try {
-            const params = getBlogListParams(req);
+            const params = getPartnerListParams(req);
 
             if (!params) {
                 responseInvalid(res);
                 return;
             }
 
-            const result = await BlogController.getBlogList(params);
+            const result = await PartnerController.getPartnerList(params);
             if (!result) {
                 throw new Error('Internal Server Error');
             }
@@ -63,9 +63,9 @@ function registerRoutes(app) {
         }
     })
 
-    app.delete('/blog/delete', async (req, res) => {
+    app.delete('/partner/delete', async (req, res) => {
         try {
-            const params = getDeleteBlogParams(req);
+            const params = getDeletePartnerParams(req);
 
             if (!params) {
                 responseInvalid(res);
@@ -76,7 +76,7 @@ function registerRoutes(app) {
                 return;
             }
 
-            const result = await BlogController.deleteBlog(params);
+            const result = await PartnerController.deletePartner(params);
             if (!result) {
                 throw new Error('Internal Server Error');
             }
