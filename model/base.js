@@ -1,3 +1,5 @@
+const CONST = require('../common/const');
+
 /* eslint-disable */
 async function connect() {
     return new Promise((resolve, reject) => {

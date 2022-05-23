@@ -10,7 +10,7 @@ function response(ret, res) {
 function responseInvalid(res) {
     const ret = {
         status: CONST.RES_CODE.FAILED,
-        error: 'validation failed!',
+        error: 'validation failed',
     };
     response(ret, res);
 }
