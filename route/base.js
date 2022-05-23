@@ -1,4 +1,5 @@
 const CONST = require('../common/const');
+const { verifyToken } = require('./request/base');
 
 function response(ret, res) {
     res.setHeader('content-type', 'text/plain');
@@ -15,7 +16,20 @@ function responseInvalid(res) {
     response(ret, res);
 }
 
+async function verifyJWT(req, res) {
+    if (!await verifyToken(req)) {
+        response({
+            status: CONST.RES_CODE.INVALID_JWT,
+            error: 'Invalid JWT Token'
+        }, res);
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     response,
     responseInvalid,
+    verifyJWT
 };

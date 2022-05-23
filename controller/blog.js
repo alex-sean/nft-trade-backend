@@ -17,6 +17,21 @@ async function addBlog(params) {
     }
 }
 
+async function getBlogList(params) {
+    try {
+        const blogs = await BlogModel.findAll(params.where, '*', [], params.limit, params.offset);
+        const total = await BlogModel.getCount(params.where);
+
+        return {
+            blogs: blogs,
+            total: total
+        }
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
-    addBlog
+    addBlog,
+    getBlogList
 }

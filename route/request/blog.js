@@ -44,6 +44,33 @@ function isValidRegisterBlogParams(params) {
     return true;
 }
 
+function getBlogListParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidBlogListParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidBlogListParams(params) {
+    if (params.offset === undefined) {
+        return false;
+    }
+
+    if (params.limit === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
-    getRegisterBlogParams
+    getRegisterBlogParams,
+    getBlogListParams
 }
