@@ -1,6 +1,8 @@
 const { responseInvalid, response } = require('./base');
 const { 
-    getRegisterContactParams, getContactListParams
+    getRegisterContactParams,
+    getContactListParams,
+    getContactReplyParams
 } = require('./request/contact');
 const { verifyJWT } = require('./base');
 const CONST = require('../common/const');
@@ -53,6 +55,36 @@ function registerRoutes(app) {
                 status: CONST.RES_CODE.SUCCESS,
                 data: result
             }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.post('/contact/reply', async (req, res) => {
+        try {
+            const params = getContactReplyParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            if (!await verifyJWT(req, res)) {
+                return;
+            }
+
+            params.status = CONST.CONTACT_STATUS.REPLIED;
+
+            if (await ContactController.replyContact(params)) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
         } catch (err) {
             response({
                 status: CONST.RES_CODE.FAILED,

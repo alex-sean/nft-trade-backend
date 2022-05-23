@@ -8,7 +8,13 @@ const RES_CODE = {
     INVALID_JWT: 401
 };
 
+const CONTACT_STATUS = {
+    PENDING: 0,
+    REPLIED: 1
+};
+
 module.exports = {
     MYSQL_ERR_NO,
-    RES_CODE
+    RES_CODE,
+    CONTACT_STATUS
 }
