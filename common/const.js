@@ -13,8 +13,14 @@ const CONTACT_STATUS = {
     REPLIED: 1
 };
 
+const VERIFY_STATUS = {
+    NOT_VERIFIED: 0,
+    VERIFIED: 1
+};
+
 module.exports = {
     MYSQL_ERR_NO,
     RES_CODE,
-    CONTACT_STATUS
+    CONTACT_STATUS,
+    VERIFY_STATUS
 }
