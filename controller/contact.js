@@ -30,8 +30,17 @@ async function replyContact(params) {
     }
 }
 
+async function getContact(id) {
+    try {
+        return await ContactModel.findOne({id: id});
+    } catch (err)  {
+        return null;
+    }
+}
+
 module.exports = {
     addContact,
     getContactList,
-    replyContact
+    replyContact,
+    getContact
 }
