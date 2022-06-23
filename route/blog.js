@@ -91,6 +91,32 @@ function registerRoutes(app) {
             }, res);
         }
     })
+
+    app.get('/blog/detail', async (req, res) => {
+        try {
+            const params = getBlogParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await BlogController.getBlog(params.id);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+                data: result
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
 }
 
 module.exports = {

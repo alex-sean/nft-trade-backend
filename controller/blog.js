@@ -6,6 +6,10 @@ async function addBlog(params) {
     try {
         const thumbPath = await FileUtils.uploadFile(params.thumbnail, process.env.DIR_BLOG_THUMBNAIL);
         params.thumbnail = thumbPath;
+        const image1Path = await FileUtils.uploadFile(params.image1, process.env.DIR_BLOG_THUMBNAIL);
+        params.image1 = image1Path;
+        const image2Path = await FileUtils.uploadFile(params.image2, process.env.DIR_BLOG_THUMBNAIL);
+        params.image2 = image2Path;
 
         if (await BlogModel.register(params)) {
             return true;
@@ -49,8 +53,17 @@ async function deleteBlog(params) {
     }
 }
 
+async function getBlog(id) {
+    try {
+        return await BlogModel.findOne({id: id});
+    } catch (err)  {
+        return null;
+    }
+}
+
 module.exports = {
     addBlog,
     getBlogList,
-    deleteBlog
+    deleteBlog,
+    getBlog
 }

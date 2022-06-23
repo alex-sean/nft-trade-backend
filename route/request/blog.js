@@ -11,7 +11,17 @@ function getRegisterBlogParams(req) {
         return null;
     }
 
+    if (!req.files.image1) {
+        return null;
+    }
+
+    if (!req.files.image2) {
+        return null;
+    }
+
     params.thumbnail = req.files.thumbnail;
+    params.image1 = req.files.image1;
+    params.image2 = req.files.image2;
 
     if (!isValidRegisterBlogParams(params)) {
         return null;
@@ -26,10 +36,6 @@ function isValidRegisterBlogParams(params) {
     }
 
     if (!params.description) {
-        return false;
-    }
-
-    if (!params.url) {
         return false;
     }
 
@@ -92,8 +98,31 @@ function isValidDeleteBlogParams(params) {
     return true;
 }
 
+function getBlogParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidGetBlogParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetBlogParams(params) {
+    if (!params.id) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getRegisterBlogParams,
     getBlogListParams,
-    getDeleteBlogParams
+    getDeleteBlogParams,
+    getBlogParams
 }
