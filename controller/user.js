@@ -2,6 +2,7 @@ require('dotenv').config();
 const UserModel = require('../model/user');
 const FileUtils = require('../common/file_util');
 const CONST = require('../common/const');
+const Moralis = require('../services/moralis');
 
 async function addUser(params) {
     try {
@@ -10,7 +11,12 @@ async function addUser(params) {
             params.avatar = avatar;
         }
 
-        if (await UserModel.register(params)) {
+        if (params.background) {
+            const background = await FileUtils.uploadFile(params.background, process.env.DIR_BACKGROUND_THUMBNAIL);
+            params.background = background;
+        }
+
+        if (await Moralis.registerUser(params)) {
             return true;
         }
 
@@ -49,7 +55,33 @@ async function updateUser(params) {
             params.avatar = avatar;
         }
 
-        return await UserModel.updateByAddress(params, params.address);
+        if (params.background) {
+            const background = await FileUtils.uploadFile(params.background, process.env.DIR_BACKGROUND_THUMBNAIL);
+            params.background = background;
+        }
+
+        if (await Moralis.updateUser(params)) {
+            return true;
+        }
+
+        return false;
+    } catch (err) {
+        return false;
+    }
+}
+
+async function uploadBackground(params) {
+    try {
+        if (params.background) {
+            const background = await FileUtils.uploadFile(params.background, process.env.DIR_AVATAR_THUMBNAIL);
+            params.background = background;
+        }
+
+        if (await Moralis.updateBackground(params)) {
+            return true;
+        }
+
+        return false;
     } catch (err) {
         return false;
     }
@@ -65,7 +97,11 @@ async function verifyUser(id, status = CONST.VERIFY_STATUS.NOT_VERIFIED) {
 
 async function getUser(address) {
     try {
-        return await UserModel.findOne({address: address});
+        let userInfo = await Moralis.getUser(address);
+        if (userInfo) {
+            return JSON.parse(userInfo);
+        }
+        return CONST.USER_EXIST_STATUS.NOT_EXIST;
     } catch (err)  {
         return null;
     }
@@ -77,5 +113,6 @@ module.exports = {
     deleteUser,
     updateUser,
     verifyUser,
-    getUser
+    getUser,
+    uploadBackground
 }

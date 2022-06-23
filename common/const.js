@@ -18,9 +18,15 @@ const VERIFY_STATUS = {
     VERIFIED: 1
 };
 
+const USER_EXIST_STATUS = {
+    NOT_EXIST: 0,
+    EXIST: 1
+};
+
 module.exports = {
     MYSQL_ERR_NO,
     RES_CODE,
     CONTACT_STATUS,
-    VERIFY_STATUS
+    VERIFY_STATUS,
+    USER_EXIST_STATUS
 }

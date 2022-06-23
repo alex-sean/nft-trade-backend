@@ -11,6 +11,10 @@ function getRegisterUserParams(req) {
         params.avatar = req.files.avatar;
     }
 
+    if (req.files.background) {
+        params.background = req.files.background;
+    }
+
     if (!isValidRegisterUserParams(params)) {
         return null;
     }
@@ -101,6 +105,10 @@ function getUpdateUserParams(req) {
         params.avatar = req.files.avatar;
     }
 
+    if (req.files.background) {
+        params.background = req.files.background;
+    }
+
     if (!isValidUpdateUserParams(params)) {
         return null;
     }
@@ -165,11 +173,42 @@ function isValidGetUserParams(params) {
     return true;
 }
 
+function getUploadBackgroundParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (req.files.background) {
+        params.background = req.files.background;
+    }
+
+    if (!isValidUploadBackgroundParams(params)) {
+        return null;
+    }
+
+    return params
+}
+
+function isValidUploadBackgroundParams(params) {
+    if (!params.address) {
+        return false;
+    }
+
+    if (!params.background) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getRegisterUserParams,
     getUserListParams,
     getDeleteUserParams,
     getUpdateUserParams,
     getUpdateUserStatusParams,
-    getUserParams
+    getUserParams,
+    getUploadBackgroundParams
 }
