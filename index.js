@@ -5,6 +5,7 @@ const formidableMiddleware = require('express-formidable');
 const mysql = require('mysql2/promise');
 const crypto = require('crypto');
 const { registerRoutes } = require('./route');
+const { initMoralis } = require('./services/moralis');
 
 global.mysqlPool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -25,3 +26,5 @@ registerRoutes(app);
 app.listen(parseInt(process.env.PORT_NUMBER), () => {
     console.log(`Server running on port: ${process.env.PORT_NUMBER}`);
 });
+
+initMoralis();

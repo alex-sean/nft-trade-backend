@@ -5,7 +5,8 @@ const {
     getDeleteUserParams,
     getUpdateUserParams,
     getUpdateUserStatusParams,
-    getUserParams
+    getUserParams,
+    getUploadBackgroundParams
 } = require('./request/user');
 const { verifyJWT } = require('./base');
 const UserController = require('../controller/user');
@@ -120,6 +121,31 @@ function registerRoutes(app) {
         }
     })
 
+    app.post('/user/upload/background', async (req, res) => {
+        try {
+            const params = getUploadBackgroundParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await UserController.uploadBackground(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
     app.post('/user/verify', async (req, res) => {
         try {
             const params = getUpdateUserStatusParams(req);
@@ -159,8 +185,16 @@ function registerRoutes(app) {
             }
 
             const result = await UserController.getUser(params.address);
-            if (!result) {
+            if (result === null) {
                 throw new Error('Internal Server Error');
+            }
+
+            if (result === CONST.USER_EXIST_STATUS.NOT_EXIST) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: null
+                }, res);
+                return;
             }
 
             response({
