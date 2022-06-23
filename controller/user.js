@@ -28,6 +28,18 @@ async function addUser(params) {
 
 async function getUserList(params) {
     try {
+        if (params.name || params.address || params.description || params.status) {
+            params.where = {}
+            if (params.name)
+                params.where.name = ['like', `%${params.name}%`]
+            if (params.address)
+                params.where.address = ['like', `%${params.address}%`]
+            if (params.description)
+                params.where.description = ['like', `%${params.description}%`]
+            if (params.status)
+                params.where.status = params.status
+        }
+
         const users = await UserModel.findAll(params.where, '*', [], params.limit, params.offset);
         const total = await UserModel.getCount(params.where);
 

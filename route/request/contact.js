@@ -91,8 +91,31 @@ function isValidContactReplyParams(params) {
     return true;
 }
 
+function getContactParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidGetContactParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetContactParams(params) {
+    if (!params.id) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getRegisterContactParams,
     getContactListParams,
-    getContactReplyParams
+    getContactReplyParams,
+    getContactParams
 }

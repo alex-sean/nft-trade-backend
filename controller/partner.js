@@ -19,6 +19,16 @@ async function addPartner(params) {
 
 async function getPartnerList(params) {
     try {
+        if (params.title || params.content || params.status) {
+            params.where = {}
+            if (params.title)
+                params.where.title = ['like', `%${params.title}%`]
+            if (params.content)
+                params.where.description = ['like', `%${params.content}%`]
+            if (params.status)
+                params.where.status = params.status
+        }
+
         const partners = await PartnerModel.findAll(params.where, '*', [], params.limit, params.offset);
         const total = await PartnerModel.getCount(params.where);
 
