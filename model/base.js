@@ -184,7 +184,14 @@ function where(params) {
     this._query_ += ' WHERE ';
     for (let i = 0; i < Object.keys(params).length; i++) {
         const key = Object.keys(params)[i];
-        if (Array.isArray(params[key])) {
+        if (key == 'base64') {
+            for (var ii in params[key]) {
+                var r = params[key][ii]
+                if (ii > 0)
+                    this._query_ += ' AND '
+                this._query_ += `FROM_BASE64(\`${r[0]}\`) LIKE '%${r[1]}%'`
+            }
+        } else if (Array.isArray(params[key])) {
             this._query_ += `\`${key}\` ${params[key][0]} '${params[key][1]}'`;
         } else if (typeof params[key] !== 'string' && Object.keys(params[key]).length > 0) {
             subKeys = Object.keys(params[key]);

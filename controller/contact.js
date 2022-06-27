@@ -11,13 +11,13 @@ async function addContact(params) {
 async function getContactList(params) {
     try {
         if (params.name || params.email || params.content || params.type || params.status) {
-            params.where = {}
+            params.where = {base64: []}
             if (params.name)
                 params.where.name = ['like', `%${params.name}%`]
             if (params.email)
                 params.where.email = ['like', `%${params.email}%`]
             if (params.content)
-                params.where.content = ['like', `%${params.content}%`]
+                params.where.base64.push(['content', params.content])
             if (params.type)
                 params.where.type = params.type
             if (params.status)

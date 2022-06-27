@@ -24,11 +24,11 @@ async function addBlog(params) {
 async function getBlogList(params) {
     try {
         if (params.title || params.content || params.status) {
-            params.where = {}
+            params.where = {base64: []}
             if (params.title)
-                params.where.title = ['like', `%${params.title}%`]
+                params.where.base64.push(['title', params.title])
             if (params.content)
-                params.where.description = ['like', `%${params.content}%`]
+                params.where.base64.push(['description', params.content])
             if (params.status)
                 params.where.status = params.status
         }
