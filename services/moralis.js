@@ -110,6 +110,14 @@ const getOwnedCollections = async (owner) => {
     return await call('get_owned_collection', params);
 }
 
+const getCollections = async (category) => {
+    const params = {
+        category: category
+    };
+
+    return await call('get_collection', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -120,5 +128,6 @@ module.exports = {
     getOwnedTokens,
     getCreatedTokens,
     getSaleTokens,
-    getOwnedCollections
+    getOwnedCollections,
+    getCollections
 }

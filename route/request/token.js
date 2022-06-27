@@ -94,10 +94,29 @@ function isValidOwnedCollectionParams(params) {
     return true;
 }
 
+function getCollectionParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidCollectionParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidCollectionParams(params) {
+    if (params.category === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
     getCreatedTokenParams,
     getSaleTokenParams,
-    getOwnedCollectionParams
+    getOwnedCollectionParams,
+    getCollectionParams
 }

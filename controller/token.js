@@ -55,11 +55,20 @@ async function getOwnedCollections(owner) {
     }
 }
 
+async function getCollections(category) {
+    try {
+        return await Moralis.getCollections(category);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
     getOwnedTokens,
     getCreatedTokens,
     getSaleTokens,
-    getOwnedCollections
+    getOwnedCollections,
+    getCollections
 }
