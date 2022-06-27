@@ -2,7 +2,8 @@ const { responseInvalid, response } = require('./base');
 const { 
     getRegisterBlogParams,
     getBlogListParams,
-    getDeleteBlogParams
+    getDeleteBlogParams,
+    getBlogParams
 } = require('./request/blog');
 const { verifyJWT } = require('./base');
 const BlogController = require('../controller/blog');
