@@ -63,6 +63,22 @@ async function getCollections(category) {
     }
 }
 
+async function getCollectionDetail(address) {
+    try {
+        return await Moralis.getCollectionDetail(address);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function getTokensByCollection(address) {
+    try {
+        return await Moralis.getTokensByCollection(address);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -70,5 +86,7 @@ module.exports = {
     getCreatedTokens,
     getSaleTokens,
     getOwnedCollections,
-    getCollections
+    getCollections,
+    getCollectionDetail,
+    getTokensByCollection
 }

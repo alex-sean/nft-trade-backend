@@ -112,11 +112,49 @@ function isValidCollectionParams(params) {
     return true;
 }
 
+function getCollectionDetailParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidCollectionDetailParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidCollectionDetailParams(params) {
+    if (params.address === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
+function getTokensByCollectionParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidTokensByCollectionParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidTokensByCollectionParams(params) {
+    if (params.address === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
     getCreatedTokenParams,
     getSaleTokenParams,
     getOwnedCollectionParams,
-    getCollectionParams
+    getCollectionParams,
+    getCollectionDetailParams,
+    getTokensByCollectionParams
 }

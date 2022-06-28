@@ -118,6 +118,22 @@ const getCollections = async (category) => {
     return await call('get_collection', params);
 }
 
+const getCollectionDetail = async (address) => {
+    const params = {
+        address: address
+    };
+
+    return await call('get_collection_by_address', params);
+}
+
+const getTokensByCollection = async (address) => {
+    const params = {
+        address: address
+    };
+
+    return await call('get_tokens_by_collection', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -129,5 +145,7 @@ module.exports = {
     getCreatedTokens,
     getSaleTokens,
     getOwnedCollections,
-    getCollections
+    getCollections,
+    getCollectionDetail,
+    getTokensByCollection
 }

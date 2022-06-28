@@ -5,7 +5,9 @@ const {
     getCreatedTokenParams,
     getSaleTokenParams,
     getOwnedCollectionParams,
-    getCollectionParams
+    getCollectionParams,
+    getCollectionDetailParams,
+    getTokensByCollectionParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -172,6 +174,64 @@ function registerRoutes(app) {
                     status: CONST.RES_CODE.SUCCESS,
                     data: {
                         collections: collections
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/collection_detail', async (req, res) => {
+        try {
+            const params = getCollectionDetailParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const collection = await TokenController.getCollectionDetail(params.address);
+
+            if (collection) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        collection: collection
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/get_by_collection', async (req, res) => {
+        try {
+            const params = getTokensByCollectionParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const tokens = await TokenController.getTokensByCollection(params.address);
+
+            if (tokens) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        tokens: tokens
                     }
                 }, res);
             } else {
