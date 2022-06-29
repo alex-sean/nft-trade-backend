@@ -79,6 +79,14 @@ async function getTokensByCollection(address) {
     }
 }
 
+async function getTokenDetail(collectionAddress, tokenID) {
+    try {
+        return await Moralis.getTokenDetail(collectionAddress, tokenID);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -88,5 +96,6 @@ module.exports = {
     getOwnedCollections,
     getCollections,
     getCollectionDetail,
-    getTokensByCollection
+    getTokensByCollection,
+    getTokenDetail
 }

@@ -7,7 +7,8 @@ const {
     getOwnedCollectionParams,
     getCollectionParams,
     getCollectionDetailParams,
-    getTokensByCollectionParams
+    getTokensByCollectionParams,
+    getTokenDetailParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -232,6 +233,35 @@ function registerRoutes(app) {
                     status: CONST.RES_CODE.SUCCESS,
                     data: {
                         tokens: tokens
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/detail', async (req, res) => {
+        try {
+            const params = getTokenDetailParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const token = await TokenController.getTokenDetail(params.collectionAddress, params.tokenID);
+
+            if (token) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        token: token
                     }
                 }, res);
             } else {

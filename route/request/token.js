@@ -148,6 +148,28 @@ function isValidTokensByCollectionParams(params) {
     return true;
 }
 
+function getTokenDetailParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidTokenDetailParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidTokenDetailParams(params) {
+    if (params.collectionAddress === undefined) {
+        return false;
+    }
+
+    if (params.tokenID === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -156,5 +178,6 @@ module.exports = {
     getOwnedCollectionParams,
     getCollectionParams,
     getCollectionDetailParams,
-    getTokensByCollectionParams
+    getTokensByCollectionParams,
+    getTokenDetailParams
 }

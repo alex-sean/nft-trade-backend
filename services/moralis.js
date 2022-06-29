@@ -134,6 +134,15 @@ const getTokensByCollection = async (address) => {
     return await call('get_tokens_by_collection', params);
 }
 
+const getTokenDetail = async (collectionAddress, tokenID) => {
+    const params = {
+        collectionAddress: collectionAddress,
+        tokenID: tokenID,
+    };
+
+    return await call('get_token_detail', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -147,5 +156,6 @@ module.exports = {
     getOwnedCollections,
     getCollections,
     getCollectionDetail,
-    getTokensByCollection
+    getTokensByCollection,
+    getTokenDetail
 }
