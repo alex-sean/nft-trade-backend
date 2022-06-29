@@ -143,6 +143,19 @@ const getTokenDetail = async (collectionAddress, tokenID) => {
     return await call('get_token_detail', params);
 }
 
+const getOfferSyncStatus = async (offerData) => {
+    const params = {
+        collectionAddress: offerData.collectionAddress,
+        tokenID: offerData.tokenID,
+        owner: offerData.owner,
+        buyer: offerData.buyer,
+        amount: offerData.amount,
+        asset: offerData.asset
+    };
+
+    return await call('offer_synchronized', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -157,5 +170,6 @@ module.exports = {
     getCollections,
     getCollectionDetail,
     getTokensByCollection,
-    getTokenDetail
+    getTokenDetail,
+    getOfferSyncStatus
 }
