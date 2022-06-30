@@ -4,7 +4,8 @@ const {
     getOfferSyncParams,
     getCancelOfferSyncParams,
     getAcceptOfferSyncParams,
-    getListSyncParams
+    getListSyncParams,
+    getUnListSyncParams
 } = require('./request/sync');
 const TokenController = require('../controller/token');
 const SyncController = require('../controller/sync');
@@ -137,6 +138,35 @@ function registerRoutes(app) {
             }
 
             const result = await SyncController.checkListSyncStatus(params);
+
+            if (result !== null) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        status: result
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/sync/unlist', async (req, res) => {
+        try {
+            const params = getUnListSyncParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await SyncController.checkUnListSyncStatus(params);
 
             if (result !== null) {
                 response({

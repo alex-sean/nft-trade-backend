@@ -158,10 +158,37 @@ function isValidListSyncParams(params) {
     return true;
 }
 
+function getUnListSyncParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidUnListSyncParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidUnListSyncParams(params) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    if (!params.tokenID) {
+        return false;
+    }
+
+    if (!params.owner) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenMintSyncParams,
     getOfferSyncParams,
     getCancelOfferSyncParams,
     getAcceptOfferSyncParams,
-    getListSyncParams
+    getListSyncParams,
+    getUnListSyncParams
 }
