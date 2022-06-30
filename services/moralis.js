@@ -209,6 +209,16 @@ const getUnListSyncStatus = async (unlistData) => {
     return await call('unlist_synchronized', params);
 }
 
+const getBuySyncStatus = async (buyData) => {
+    const params = {
+        collectionAddress: buyData.collectionAddress,
+        tokenID: buyData.tokenID,
+        owner: buyData.owner
+    };
+
+    return await call('buy_synchronized', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -229,5 +239,6 @@ module.exports = {
     getAcceptOfferSyncStatus,
     getServiceFee,
     getListSyncStatus,
-    getUnListSyncStatus
+    getUnListSyncStatus,
+    getBuySyncStatus
 }
