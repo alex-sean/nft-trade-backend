@@ -2,7 +2,8 @@ const { responseInvalid, response } = require('./base');
 const { 
     getTokenMintSyncParams,
     getOfferSyncParams,
-    getCancelOfferSyncParams
+    getCancelOfferSyncParams,
+    getAcceptOfferSyncParams
 } = require('./request/sync');
 const TokenController = require('../controller/token');
 const SyncController = require('../controller/sync');
@@ -77,6 +78,35 @@ function registerRoutes(app) {
             }
 
             const result = await SyncController.checkCancelOfferSyncStatus(params);
+
+            if (result !== null) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        status: result
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/sync/accept_offer', async (req, res) => {
+        try {
+            const params = getAcceptOfferSyncParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await SyncController.checkAcceptOfferSyncStatus(params);
 
             if (result !== null) {
                 response({

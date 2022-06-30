@@ -168,6 +168,18 @@ const getCancelOfferSyncStatus = async (offerData) => {
     return await call('cancel_offer_synchronized', params);
 }
 
+const getAcceptOfferSyncStatus = async (offerData) => {
+    const params = {
+        collectionAddress: offerData.collectionAddress,
+        tokenID: offerData.tokenID,
+        owner: offerData.owner,
+        buyer: offerData.buyer,
+        asset: offerData.asset
+    };
+
+    return await call('accept_offer_synchronized', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -184,5 +196,6 @@ module.exports = {
     getTokensByCollection,
     getTokenDetail,
     getOfferSyncStatus,
-    getCancelOfferSyncStatus
+    getCancelOfferSyncStatus,
+    getAcceptOfferSyncStatus
 }

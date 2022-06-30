@@ -94,8 +94,43 @@ function isValidCancelOfferSyncParams(params) {
     return true;
 }
 
+function getAcceptOfferSyncParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidAcceptOfferSyncParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidAcceptOfferSyncParams(params) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    if (!params.tokenID) {
+        return false;
+    }
+
+    if (!params.owner) {
+        return false;
+    }
+
+    if (!params.buyer) {
+        return false;
+    }
+
+    if (!params.asset) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenMintSyncParams,
     getOfferSyncParams,
-    getCancelOfferSyncParams
+    getCancelOfferSyncParams,
+    getAcceptOfferSyncParams
 }
