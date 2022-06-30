@@ -149,11 +149,23 @@ const getOfferSyncStatus = async (offerData) => {
         tokenID: offerData.tokenID,
         owner: offerData.owner,
         buyer: offerData.buyer,
-        amount: offerData.amount,
+        amount: offerData.offerAmount,
         asset: offerData.asset
     };
 
     return await call('offer_synchronized', params);
+}
+
+const getCancelOfferSyncStatus = async (offerData) => {
+    const params = {
+        collectionAddress: offerData.collectionAddress,
+        tokenID: offerData.tokenID,
+        owner: offerData.owner,
+        buyer: offerData.buyer,
+        asset: offerData.asset
+    };
+
+    return await call('cancel_offer_synchronized', params);
 }
 
 module.exports = {
@@ -171,5 +183,6 @@ module.exports = {
     getCollectionDetail,
     getTokensByCollection,
     getTokenDetail,
-    getOfferSyncStatus
+    getOfferSyncStatus,
+    getCancelOfferSyncStatus
 }
