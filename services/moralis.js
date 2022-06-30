@@ -180,6 +180,14 @@ const getAcceptOfferSyncStatus = async (offerData) => {
     return await call('accept_offer_synchronized', params);
 }
 
+const getServiceFee = async () => {
+    const params = {
+        
+    };
+
+    return await call('get_service_fee', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -197,5 +205,6 @@ module.exports = {
     getTokenDetail,
     getOfferSyncStatus,
     getCancelOfferSyncStatus,
-    getAcceptOfferSyncStatus
+    getAcceptOfferSyncStatus,
+    getServiceFee
 }
