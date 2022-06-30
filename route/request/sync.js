@@ -128,9 +128,40 @@ function isValidAcceptOfferSyncParams(params) {
     return true;
 }
 
+function getListSyncParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidListSyncParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidListSyncParams(params) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    if (!params.tokenID) {
+        return false;
+    }
+
+    if (!params.owner) {
+        return false;
+    }
+
+    if (!params.listType) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenMintSyncParams,
     getOfferSyncParams,
     getCancelOfferSyncParams,
-    getAcceptOfferSyncParams
+    getAcceptOfferSyncParams,
+    getListSyncParams
 }

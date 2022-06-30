@@ -188,6 +188,17 @@ const getServiceFee = async () => {
     return await call('get_service_fee', params);
 }
 
+const getListSyncStatus = async (listData) => {
+    const params = {
+        collectionAddress: listData.collectionAddress,
+        tokenID: listData.tokenID,
+        owner: listData.owner,
+        listType: listData.listType
+    };
+
+    return await call('list_synchronized', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -206,5 +217,6 @@ module.exports = {
     getOfferSyncStatus,
     getCancelOfferSyncStatus,
     getAcceptOfferSyncStatus,
-    getServiceFee
+    getServiceFee,
+    getListSyncStatus
 }

@@ -25,8 +25,17 @@ async function checkAcceptOfferSyncStatus(params) {
     }
 }
 
+async function checkListSyncStatus(params) {
+    try {
+        return await Moralis.getListSyncStatus(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     checkOfferSyncStatus,
     checkCancelOfferSyncStatus,
-    checkAcceptOfferSyncStatus
+    checkAcceptOfferSyncStatus,
+    checkListSyncStatus
 }
