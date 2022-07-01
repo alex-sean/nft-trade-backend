@@ -49,11 +49,20 @@ async function checkBuySyncStatus(params) {
     }
 }
 
+async function checkBidSyncStatus(params) {
+    try {
+        return await Moralis.getBidSyncStatus(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     checkOfferSyncStatus,
     checkCancelOfferSyncStatus,
     checkAcceptOfferSyncStatus,
     checkListSyncStatus,
     checkUnListSyncStatus,
-    checkBuySyncStatus
+    checkBuySyncStatus,
+    checkBidSyncStatus
 }

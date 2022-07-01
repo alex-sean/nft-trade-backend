@@ -219,6 +219,17 @@ const getBuySyncStatus = async (buyData) => {
     return await call('buy_synchronized', params);
 }
 
+const getBidSyncStatus = async (bidData) => {
+    const params = {
+        collectionAddress: bidData.collectionAddress,
+        tokenID: bidData.tokenID,
+        buyer: bidData.buyer,
+        asset: bidData.asset
+    };
+
+    return await call('bid_synchronized', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -240,5 +251,6 @@ module.exports = {
     getServiceFee,
     getListSyncStatus,
     getUnListSyncStatus,
-    getBuySyncStatus
+    getBuySyncStatus,
+    getBidSyncStatus
 }
