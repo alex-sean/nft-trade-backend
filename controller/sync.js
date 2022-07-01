@@ -65,6 +65,14 @@ async function checkCancelBidSyncStatus(params) {
     }
 }
 
+async function checkCompleteAuctionSyncStatus(params) {
+    try {
+        return await Moralis.getCompleteAuctionSyncStatus(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     checkOfferSyncStatus,
     checkCancelOfferSyncStatus,
@@ -73,5 +81,6 @@ module.exports = {
     checkUnListSyncStatus,
     checkBuySyncStatus,
     checkBidSyncStatus,
-    checkCancelBidSyncStatus
+    checkCancelBidSyncStatus,
+    checkCompleteAuctionSyncStatus
 }

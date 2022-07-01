@@ -8,7 +8,8 @@ const {
     getUnListSyncParams,
     getBuySyncParams,
     getBidSyncParams,
-    getCancelBidSyncParams
+    getCancelBidSyncParams,
+    getCompleteAuctionSyncParams
 } = require('./request/sync');
 const TokenController = require('../controller/token');
 const SyncController = require('../controller/sync');
@@ -257,6 +258,35 @@ function registerRoutes(app) {
             }
 
             const result = await SyncController.checkCancelBidSyncStatus(params);
+
+            if (result !== null) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        status: result
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/sync/complete_auction', async (req, res) => {
+        try {
+            const params = getCompleteAuctionSyncParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await SyncController.checkCompleteAuctionSyncStatus(params);
 
             if (result !== null) {
                 response({
