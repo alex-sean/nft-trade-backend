@@ -240,6 +240,36 @@ function isValidBidSyncParams(params) {
     return true;
 }
 
+function getCancelBidSyncParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidCancelBidSyncParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidCancelBidSyncParams(params) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    if (!params.tokenID) {
+        return false;
+    }
+
+    if (!params.buyer) {
+        return false;
+    }
+
+    if (!params.asset) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenMintSyncParams,
     getOfferSyncParams,
@@ -248,5 +278,6 @@ module.exports = {
     getListSyncParams,
     getUnListSyncParams,
     getBuySyncParams,
-    getBidSyncParams
+    getBidSyncParams,
+    getCancelBidSyncParams
 }
