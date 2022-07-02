@@ -170,6 +170,60 @@ function isValidTokenDetailParams(params) {
     return true;
 }
 
+function getLikeCollectionParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (params.like && params.like === 'true') {
+        params.like = true;
+    } else if (params.like && params.like === 'false') {
+        params.like = false;
+    }
+
+    if (!isValidLikeCollectionParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidLikeCollectionParams(params) {
+    if (params.collectionAddress === undefined) {
+        return false;
+    }
+
+    if (params.address === undefined) {
+        return false;
+    }
+
+    if (params.like === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
+function getGetLikeCollectionParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidGetLikeCollectionParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetLikeCollectionParams(params) {
+    if (params.collectionAddress === undefined) {
+        return false;
+    }
+
+    if (params.address === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -179,5 +233,7 @@ module.exports = {
     getCollectionParams,
     getCollectionDetailParams,
     getTokensByCollectionParams,
-    getTokenDetailParams
+    getTokenDetailParams,
+    getLikeCollectionParams,
+    getGetLikeCollectionParams
 }

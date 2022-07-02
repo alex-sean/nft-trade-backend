@@ -255,6 +255,33 @@ const getHotBidItems = async () => {
     return await call('hot_bid_items', {});
 }
 
+const likeCollection = async (likeData) => {
+    const params = {
+        collectionAddress: likeData.collectionAddress,
+        address: likeData.address,
+    };
+
+    return await call('like_collection', params);
+}
+
+const unlikeCollection = async (unlikeData) => {
+    const params = {
+        collectionAddress: unlikeData.collectionAddress,
+        address: unlikeData.address,
+    };
+
+    return await call('unlike_collection', params);
+}
+
+const getlikeCollection = async (likeData) => {
+    const params = {
+        collectionAddress: likeData.collectionAddress,
+        address: likeData.address,
+    };
+
+    return await call('get_like_collection', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -280,5 +307,8 @@ module.exports = {
     getBidSyncStatus,
     getCancelBidSyncStatus,
     getCompleteAuctionSyncStatus,
-    getHotBidItems
+    getHotBidItems,
+    likeCollection,
+    unlikeCollection,
+    getlikeCollection
 }

@@ -95,6 +95,30 @@ async function getHotBidItems() {
     }
 }
 
+async function likeCollection(params) {
+    try {
+        return await Moralis.likeCollection(params);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function unlikeCollection(params) {
+    try {
+        return await Moralis.unlikeCollection(params);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function getLikeCollection(params) {
+    try {
+        return await Moralis.getlikeCollection(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -106,5 +130,8 @@ module.exports = {
     getCollectionDetail,
     getTokensByCollection,
     getTokenDetail,
-    getHotBidItems
+    getHotBidItems,
+    likeCollection,
+    unlikeCollection,
+    getLikeCollection
 }
