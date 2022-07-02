@@ -12,7 +12,9 @@ const {
     getLikeCollectionParams,
     getGetLikeCollectionParams,
     getPopularCollectionsParams,
-    getFeaturedCollectionsParams
+    getFeaturedCollectionsParams,
+    getLikeTokenParams,
+    getGetLikeTokenParams,
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -336,41 +338,6 @@ function registerRoutes(app) {
         }
     })
 
-    app.get('/token/like_collection', async (req, res) => {
-        try {
-            const params = getLikeCollectionParams(req);
-
-            if (!params) {
-                responseInvalid(res);
-                return;
-            }
-
-            let status = false;
-
-            if (params.like) {
-                status = await TokenController.likeCollection(params);
-            } else {
-                status = await TokenController.unlikeCollection(params);
-            }
-
-            if (status !== undefined) {
-                response({
-                    status: CONST.RES_CODE.SUCCESS,
-                    data: {
-                        status: status
-                    }
-                }, res);
-            } else {
-                throw new Error('Internal Server Error');
-            }
-        } catch (err) {
-            response({
-                status: CONST.RES_CODE.FAILED,
-                error: err.message
-            }, res);
-        }
-    })
-
     app.get('/token/get_like_collection', async (req, res) => {
         try {
             const params = getGetLikeCollectionParams(req);
@@ -445,6 +412,70 @@ function registerRoutes(app) {
                     status: CONST.RES_CODE.SUCCESS,
                     data: {
                         collections: collections
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/like_token', async (req, res) => {
+        try {
+            const params = getLikeTokenParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            let status = false;
+
+            if (params.like) {
+                status = await TokenController.likeToken(params);
+            } else {
+                status = await TokenController.unlikeToken(params);
+            }
+
+            if (status !== undefined) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        status: status
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/get_like_token', async (req, res) => {
+        try {
+            const params = getGetLikeTokenParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            let status = await TokenController.getLikeToken(params);
+
+            if (status !== undefined) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        status: status
                     }
                 }, res);
             } else {

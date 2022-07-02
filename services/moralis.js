@@ -298,6 +298,36 @@ const getFeaturedCollections = async (collectinParams) => {
     return await call('get_featured_collections', params);
 }
 
+const likeToken = async (likeData) => {
+    const params = {
+        collectionAddress: likeData.collectionAddress,
+        tokenID: likeData.tokenID,
+        address: likeData.address,
+    };
+
+    return await call('like_token', params);
+}
+
+const unlikeToken = async (unlikeData) => {
+    const params = {
+        collectionAddress: unlikeData.collectionAddress,
+        tokenID: unlikeData.tokenID,
+        address: unlikeData.address,
+    };
+
+    return await call('unlike_token', params);
+}
+
+const getLikeToken = async (likeData) => {
+    const params = {
+        collectionAddress: likeData.collectionAddress,
+        tokenID: likeData.tokenID,
+        address: likeData.address,
+    };
+
+    return await call('get_like_token', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -328,5 +358,8 @@ module.exports = {
     unlikeCollection,
     getlikeCollection,
     getPopularCollections,
-    getFeaturedCollections
+    getFeaturedCollections,
+    likeToken,
+    unlikeToken,
+    getLikeToken,
 }

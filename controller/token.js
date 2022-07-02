@@ -135,6 +135,30 @@ async function getFeaturedCollections(params) {
     }
 }
 
+async function likeToken(params) {
+    try {
+        return await Moralis.likeToken(params);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function unlikeToken(params) {
+    try {
+        return await Moralis.unlikeToken(params);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function getLikeToken(params) {
+    try {
+        return await Moralis.getLikeToken(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -151,5 +175,8 @@ module.exports = {
     unlikeCollection,
     getLikeCollection,
     getPopularCollections,
-    getFeaturedCollections
+    getFeaturedCollections,
+    likeToken,
+    unlikeToken,
+    getLikeToken
 }

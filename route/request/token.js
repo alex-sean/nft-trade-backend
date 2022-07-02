@@ -266,6 +266,68 @@ function isValidGetFeaturedCollectionsParams(params) {
     return true;
 }
 
+function getLikeTokenParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (params.like && params.like === 'true') {
+        params.like = true;
+    } else if (params.like && params.like === 'false') {
+        params.like = false;
+    }
+
+    if (!isValidLikeTokenParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidLikeTokenParams(params) {
+    if (params.collectionAddress === undefined) {
+        return false;
+    }
+
+    if (params.address === undefined) {
+        return false;
+    }
+
+    if (params.tokenID === undefined) {
+        return false;
+    }
+
+    if (params.like === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
+function getGetLikeTokenParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidGetLikeTokenParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetLikeTokenParams(params) {
+    if (params.collectionAddress === undefined) {
+        return false;
+    }
+
+    if (!params.tokenID) {
+        return false;
+    }
+
+    if (params.address === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -279,5 +341,7 @@ module.exports = {
     getLikeCollectionParams,
     getGetLikeCollectionParams,
     getPopularCollectionsParams,
-    getFeaturedCollectionsParams
+    getFeaturedCollectionsParams,
+    getLikeTokenParams,
+    getGetLikeTokenParams,
 }
