@@ -127,6 +127,14 @@ async function getPopularCollections(from) {
     }
 }
 
+async function getFeaturedCollections(params) {
+    try {
+        return await Moralis.getFeaturedCollections(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -142,5 +150,6 @@ module.exports = {
     likeCollection,
     unlikeCollection,
     getLikeCollection,
-    getPopularCollections
+    getPopularCollections,
+    getFeaturedCollections
 }

@@ -290,6 +290,14 @@ const getPopularCollections = async (from) => {
     return await call('get_popular_collections', params);
 }
 
+const getFeaturedCollections = async (collectinParams) => {
+    const params = {
+        cateogry: collectinParams.category,
+    };
+
+    return await call('get_featured_collections', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -319,5 +327,6 @@ module.exports = {
     likeCollection,
     unlikeCollection,
     getlikeCollection,
-    getPopularCollections
+    getPopularCollections,
+    getFeaturedCollections
 }

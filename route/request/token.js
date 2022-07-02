@@ -248,6 +248,24 @@ function isValidGetPopularCollectionsParams(params) {
     return true;
 }
 
+function getFeaturedCollectionsParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidGetFeaturedCollectionsParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetFeaturedCollectionsParams(params) {
+    if (params.category === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -260,5 +278,6 @@ module.exports = {
     getTokenDetailParams,
     getLikeCollectionParams,
     getGetLikeCollectionParams,
-    getPopularCollectionsParams
+    getPopularCollectionsParams,
+    getFeaturedCollectionsParams
 }

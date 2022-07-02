@@ -11,7 +11,8 @@ const {
     getTokenDetailParams,
     getLikeCollectionParams,
     getGetLikeCollectionParams,
-    getPopularCollectionsParams
+    getPopularCollectionsParams,
+    getFeaturedCollectionsParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -409,6 +410,35 @@ function registerRoutes(app) {
             }
 
             let collections = await TokenController.getPopularCollections(params.from);
+
+            if (collections) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        collections: collections
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/get_featured_collections', async (req, res) => {
+        try {
+            const params = getFeaturedCollectionsParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            let collections = await TokenController.getFeaturedCollections(params);
 
             if (collections) {
                 response({
