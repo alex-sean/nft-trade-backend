@@ -251,6 +251,10 @@ const getCompleteAuctionSyncStatus = async (auctionData) => {
     return await call('complete_auction_synchronized', params);
 }
 
+const getHotBidItems = async () => {
+    return await call('hot_bid_items', {});
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -275,5 +279,6 @@ module.exports = {
     getBuySyncStatus,
     getBidSyncStatus,
     getCancelBidSyncStatus,
-    getCompleteAuctionSyncStatus
+    getCompleteAuctionSyncStatus,
+    getHotBidItems
 }

@@ -274,6 +274,28 @@ function registerRoutes(app) {
             }, res);
         }
     })
+
+    app.get('/token/hot_bid', async (req, res) => {
+        try {
+            const tokens = await TokenController.getHotBidItems();
+
+            if (tokens) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        tokens: tokens
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
 }
 
 module.exports = {
