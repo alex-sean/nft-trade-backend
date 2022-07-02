@@ -282,6 +282,14 @@ const getlikeCollection = async (likeData) => {
     return await call('get_like_collection', params);
 }
 
+const getPopularCollections = async (from) => {
+    const params = {
+        from: from,
+    };
+
+    return await call('get_popular_collections', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -310,5 +318,6 @@ module.exports = {
     getHotBidItems,
     likeCollection,
     unlikeCollection,
-    getlikeCollection
+    getlikeCollection,
+    getPopularCollections
 }

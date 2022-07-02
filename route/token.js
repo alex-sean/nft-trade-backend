@@ -10,7 +10,8 @@ const {
     getTokensByCollectionParams,
     getTokenDetailParams,
     getLikeCollectionParams,
-    getGetLikeCollectionParams
+    getGetLikeCollectionParams,
+    getPopularCollectionsParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -385,6 +386,35 @@ function registerRoutes(app) {
                     status: CONST.RES_CODE.SUCCESS,
                     data: {
                         status: status
+                    }
+                }, res);
+            } else {
+                throw new Error('Internal Server Error');
+            }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/token/get_popular_collections', async (req, res) => {
+        try {
+            const params = getPopularCollectionsParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            let collections = await TokenController.getPopularCollections(params.from);
+
+            if (collections) {
+                response({
+                    status: CONST.RES_CODE.SUCCESS,
+                    data: {
+                        collections: collections
                     }
                 }, res);
             } else {
