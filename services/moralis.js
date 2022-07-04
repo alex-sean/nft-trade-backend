@@ -328,6 +328,25 @@ const getLikeToken = async (likeData) => {
     return await call('get_like_token', params);
 }
 
+const getActivities = async (activityParams) => {
+    const params = {
+        category: activityParams.category,
+        from: activityParams.from,
+    };
+
+    return await call('get_activities', params);
+}
+
+const getActivitiesByToken = async (activityParams) => {
+    const params = {
+        collectionAddress: activityParams.collectionAddress,
+        tokenID: activityParams.tokenID,
+        category: activityParams.category
+    };
+
+    return await call('get_activities_by_token', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -362,4 +381,6 @@ module.exports = {
     likeToken,
     unlikeToken,
     getLikeToken,
+    getActivities,
+    getActivitiesByToken
 }
