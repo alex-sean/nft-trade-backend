@@ -9,6 +9,15 @@ async function getActivitiesByToken(params) {
     }
 }
 
+async function getActivity(params) {
+    try {
+        return await Moralis.getActivity(params);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
-    getActivitiesByToken
+    getActivitiesByToken,
+    getActivity
 }

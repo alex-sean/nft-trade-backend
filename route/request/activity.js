@@ -26,6 +26,37 @@ function isValidGetActivityTokenParams(params) {
     return true;
 }
 
+function getGetActivityParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!isValidGetActivityParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidGetActivityParams(params) {
+    if (params.filter === undefined) {
+        return false;
+    }
+
+    if (params.search === undefined) {
+        return false;
+    }
+
+    if (params.from === undefined) {
+        return false;
+    }
+
+    if (params.limit === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
-    getGetActivityByTokenParams
+    getGetActivityByTokenParams,
+    getGetActivityParams
 }
