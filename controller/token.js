@@ -161,7 +161,7 @@ async function getLikeToken(params) {
 
 async function verifyCollection(params) {
     try {
-        return await Moralis.verifyCollection(address);
+        return await Moralis.verifyCollection(params);
     } catch (err) {
         return null;
     }
@@ -169,7 +169,15 @@ async function verifyCollection(params) {
 
 async function setFeatured(params) {
     try {
-        return await Moralis.setFeatured(address);
+        return await Moralis.setFeatured(params);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function getCollectionPrices(params) {
+    try {
+        return await Moralis.getCollectPrices(params);
     } catch (err) {
         return null;
     }
@@ -196,5 +204,6 @@ module.exports = {
     unlikeToken,
     getLikeToken,
     verifyCollection,
-    setFeatured
+    setFeatured,
+    getCollectionPrices
 }

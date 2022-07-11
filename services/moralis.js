@@ -358,31 +358,39 @@ const getActivity = async (activityParams) => {
     return await call('get_activities', params);
 }
 
-const verifyUser = async (params) => {
+const verifyUser = async (verifyparams) => {
     const params = {
-        address: params.address,
-        status: params.status,
+        address: verifyparams.address,
+        status: verifyparams.status,
     };
 
     return await call('verify_user', params);
 }
 
-const verifyCollection = async (params) => {
+const verifyCollection = async (verifyparams) => {
     const params = {
-        address: params.collectionAddress,
-        status: params.status,
+        address: verifyparams.collectionAddress,
+        status: verifyparams.status,
     };
 
     return await call('verify_collection', params);
 }
 
-const setFeatured = async (params) => {
+const setFeatured = async (featureParam) => {
     const params = {
-        collectionAddress: params.collectionAddress,
-        status: params.status,
+        collectionAddress: featureParam.collectionAddress,
+        status: featureParam.status,
     };
 
     return await call('set_featured', params);
+}
+
+const getCollectPrices = async (collectionParam) => {
+    const params = {
+        collectionAddress: collectionParam.collectionAddress,
+    };
+
+    return await call('get_collection_prices', params);
 }
 
 module.exports = {
@@ -424,5 +432,6 @@ module.exports = {
     getActivity,
     verifyUser,
     verifyCollection,
-    setFeatured
+    setFeatured,
+    getCollectPrices
 }

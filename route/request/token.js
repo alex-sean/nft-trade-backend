@@ -382,6 +382,29 @@ function isValidSetFeatureCollectionParams(params) {
     return true;
 }
 
+function getGetCollectionPricesParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidGetCollectionPricesParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+
+function isValidGetCollectionPricesParams(params) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -399,5 +422,6 @@ module.exports = {
     getLikeTokenParams,
     getGetLikeTokenParams,
     getUpdateCollectionStatusParams,
-    getSetFeatureCollectionParams
+    getSetFeatureCollectionParams,
+    getGetCollectionPricesParams
 }
