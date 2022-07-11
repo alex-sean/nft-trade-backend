@@ -15,6 +15,7 @@ const {
     getFeaturedCollectionsParams,
     getLikeTokenParams,
     getGetLikeTokenParams,
+    getUpdateCollectionStatusParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -481,6 +482,35 @@ function registerRoutes(app) {
             } else {
                 throw new Error('Internal Server Error');
             }
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.post('/token/verify_collection', async (req, res) => {
+        try {
+            const params = getUpdateCollectionStatusParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            if (!await verifyJWT(req, res)) {
+                return;
+            }
+
+            const result = await TokenController.verifyCollection(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+            }, res);
         } catch (err) {
             response({
                 status: CONST.RES_CODE.FAILED,

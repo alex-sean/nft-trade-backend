@@ -360,11 +360,20 @@ const getActivity = async (activityParams) => {
 
 const verifyUser = async (params) => {
     const params = {
-        address: params.search,
-        status: params.filter,
+        address: params.address,
+        status: params.status,
     };
 
     return await call('verify_user', params);
+}
+
+const verifyCollection = async (params) => {
+    const params = {
+        address: params.address,
+        status: params.status,
+    };
+
+    return await call('verify_collection', params);
 }
 
 module.exports = {
@@ -404,5 +413,6 @@ module.exports = {
     getActivities,
     getActivitiesByToken,
     getActivity,
-    verifyUser
+    verifyUser,
+    verifyCollection
 }

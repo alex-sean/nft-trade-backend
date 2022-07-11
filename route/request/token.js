@@ -328,6 +328,33 @@ function isValidGetLikeTokenParams(params) {
     return true;
 }
 
+function getUpdateCollectionStatusParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidUpdateCollectionStatusParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+
+function isValidUpdateCollectionStatusParams(params) {
+    if (!params.address) {
+        return false;
+    }
+
+    if (!params.status) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getTokenUploadParams,
     getOwnedTokenParams,
@@ -344,4 +371,5 @@ module.exports = {
     getFeaturedCollectionsParams,
     getLikeTokenParams,
     getGetLikeTokenParams,
+    getUpdateCollectionStatusParams
 }
