@@ -99,9 +99,9 @@ async function uploadBackground(params) {
     }
 }
 
-async function verifyUser(id, status = CONST.VERIFY_STATUS.NOT_VERIFIED) {
+async function verifyUser(params) {
     try {
-        return await UserModel.updateById({status: status}, id);
+        return await Moralis.verifyUser(params);
     } catch (err) {
         return false;
     }

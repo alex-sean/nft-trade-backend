@@ -358,6 +358,15 @@ const getActivity = async (activityParams) => {
     return await call('get_activities', params);
 }
 
+const verifyUser = async (params) => {
+    const params = {
+        address: params.search,
+        status: params.filter,
+    };
+
+    return await call('verify_user', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -394,5 +403,6 @@ module.exports = {
     getLikeToken,
     getActivities,
     getActivitiesByToken,
-    getActivity
+    getActivity,
+    verifyUser
 }

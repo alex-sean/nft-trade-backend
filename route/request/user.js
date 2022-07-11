@@ -140,7 +140,7 @@ function getUpdateUserStatusParams(req) {
 
 
 function isValidUpdateUserStatusParams(params) {
-    if (!params.id) {
+    if (!params.address) {
         return false;
     }
 

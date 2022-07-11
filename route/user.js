@@ -159,7 +159,7 @@ function registerRoutes(app) {
                 return;
             }
 
-            const result = await UserController.verifyUser(params.id, params.status);
+            const result = await UserController.verifyUser(params);
             if (!result) {
                 throw new Error('Internal Server Error');
             }
