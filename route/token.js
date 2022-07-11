@@ -550,7 +550,7 @@ function registerRoutes(app) {
         }
     })
 
-    app.post('/token/collection_prices', async (req, res) => {
+    app.get('/token/collection_prices', async (req, res) => {
         try {
             const params = getGetCollectionPricesParams(req);
 
@@ -559,17 +559,16 @@ function registerRoutes(app) {
                 return;
             }
 
-            if (!await verifyJWT(req, res)) {
-                return;
-            }
-
-            const result = await TokenController.getCollectionPrices(params);
-            if (!result) {
+            const prices = await TokenController.getCollectionPrices(params);
+            if (!prices) {
                 throw new Error('Internal Server Error');
             }
 
             response({
                 status: CONST.RES_CODE.SUCCESS,
+                data: {
+                    prices: prices
+                }
             }, res);
         } catch (err) {
             response({
