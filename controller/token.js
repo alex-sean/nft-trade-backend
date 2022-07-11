@@ -167,6 +167,14 @@ async function verifyCollection(params) {
     }
 }
 
+async function setFeatured(params) {
+    try {
+        return await Moralis.setFeatured(address);
+    } catch (err) {
+        return null;
+    }
+}
+
 module.exports = {
     uploadToken,
     checkMintSynchronization,
@@ -187,5 +195,6 @@ module.exports = {
     likeToken,
     unlikeToken,
     getLikeToken,
-    verifyCollection
+    verifyCollection,
+    setFeatured
 }

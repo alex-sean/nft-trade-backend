@@ -369,11 +369,20 @@ const verifyUser = async (params) => {
 
 const verifyCollection = async (params) => {
     const params = {
-        address: params.address,
+        address: params.collectionAddress,
         status: params.status,
     };
 
     return await call('verify_collection', params);
+}
+
+const setFeatured = async (params) => {
+    const params = {
+        collectionAddress: params.collectionAddress,
+        status: params.status,
+    };
+
+    return await call('set_featured', params);
 }
 
 module.exports = {
@@ -414,5 +423,6 @@ module.exports = {
     getActivitiesByToken,
     getActivity,
     verifyUser,
-    verifyCollection
+    verifyCollection,
+    setFeatured
 }

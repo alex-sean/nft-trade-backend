@@ -344,7 +344,34 @@ function getUpdateCollectionStatusParams(req) {
 
 
 function isValidUpdateCollectionStatusParams(params) {
-    if (!params.address) {
+    if (!params.collectionAddress) {
+        return false;
+    }
+
+    if (!params.status) {
+        return false;
+    }
+
+    return true;
+}
+
+function getSetFeatureCollectionParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidSetFeatureCollectionParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+
+function isValidSetFeatureCollectionParams(params) {
+    if (!params.collectionAddress) {
         return false;
     }
 
@@ -371,5 +398,6 @@ module.exports = {
     getFeaturedCollectionsParams,
     getLikeTokenParams,
     getGetLikeTokenParams,
-    getUpdateCollectionStatusParams
+    getUpdateCollectionStatusParams,
+    getSetFeatureCollectionParams
 }

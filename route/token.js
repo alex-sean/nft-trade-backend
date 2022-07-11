@@ -15,7 +15,8 @@ const {
     getFeaturedCollectionsParams,
     getLikeTokenParams,
     getGetLikeTokenParams,
-    getUpdateCollectionStatusParams
+    getUpdateCollectionStatusParams,
+    getSetFeatureCollectionParams
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
@@ -504,6 +505,35 @@ function registerRoutes(app) {
             }
 
             const result = await TokenController.verifyCollection(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.post('/token/set_featured', async (req, res) => {
+        try {
+            const params = getSetFeatureCollectionParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            if (!await verifyJWT(req, res)) {
+                return;
+            }
+
+            const result = await TokenController.setFeatured(params);
             if (!result) {
                 throw new Error('Internal Server Error');
             }
