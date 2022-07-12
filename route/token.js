@@ -177,7 +177,7 @@ function registerRoutes(app) {
                 return;
             }
 
-            const collections = await TokenController.getCollections(params.category);
+            const collections = await TokenController.getCollections(params);
 
             if (collections) {
                 response({

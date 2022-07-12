@@ -109,6 +109,22 @@ function isValidCollectionParams(params) {
         return false;
     }
 
+    if (params.keyword === undefined) {
+        return false;
+    }
+
+    if (params.from === undefined) {
+        return false;
+    }
+
+    if (params.limit === undefined) {
+        return false;
+    }
+
+    if (params.sort === undefined) {
+        return false;
+    }
+
     return true;
 }
 

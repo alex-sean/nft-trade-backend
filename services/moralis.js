@@ -110,9 +110,13 @@ const getOwnedCollections = async (owner) => {
     return await call('get_owned_collection', params);
 }
 
-const getCollections = async (category) => {
+const getCollections = async (filterParam) => {
     const params = {
-        category: category
+        category: filterParam.category,
+        keyword: filterParam.keyword,
+        from: filterParam.from,
+        limit: filterParam.limit,
+        sort: filterParam.sort
     };
 
     return await call('get_collection', params);

@@ -55,9 +55,9 @@ async function getOwnedCollections(owner) {
     }
 }
 
-async function getCollections(category) {
+async function getCollections(params) {
     try {
-        return await Moralis.getCollections(category);
+        return await Moralis.getCollections(params);
     } catch (err) {
         return null;
     }
