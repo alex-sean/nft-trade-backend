@@ -177,13 +177,14 @@ function registerRoutes(app) {
                 return;
             }
 
-            const collections = await TokenController.getCollections(params);
+            const result = await TokenController.getCollections(params);
 
-            if (collections) {
+            if (result) {
                 response({
                     status: CONST.RES_CODE.SUCCESS,
                     data: {
-                        collections: collections
+                        collections: result.collections,
+                        total: result.total
                     }
                 }, res);
             } else {
