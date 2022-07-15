@@ -373,7 +373,7 @@ const verifyUser = async (verifyparams) => {
 
 const verifyCollection = async (verifyparams) => {
     const params = {
-        address: verifyparams.collectionAddress,
+        collectionAddress: verifyparams.collectionAddress,
         status: verifyparams.status,
     };
 
