@@ -397,6 +397,18 @@ const getCollectPrices = async (collectionParam) => {
     return await call('get_collection_prices', params);
 }
 
+const getUsers = async (searchParams) => {
+    const params = {
+        address: searchParams.address,
+        keyword: searchParams.keyword,
+        from: searchParams.offset,
+        limit: searchParams.limit,
+        status: searchParams.status,
+    };
+
+    return await call('get_users', params);
+}
+
 module.exports = {
     initMoralis,
     registerUser,
@@ -437,5 +449,6 @@ module.exports = {
     verifyUser,
     verifyCollection,
     setFeatured,
-    getCollectPrices
+    getCollectPrices,
+    getUsers
 }
