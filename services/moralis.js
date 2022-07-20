@@ -130,9 +130,12 @@ const getCollectionDetail = async (address) => {
     return await call('get_collection_by_address', params);
 }
 
-const getTokensByCollection = async (address) => {
+const getTokensByCollection = async (filterParams) => {
     const params = {
-        address: address
+        address: filterParams.address,
+        sort: filterParams.sort,
+        avaxListed: filterParams.avaxListed,
+        usdListed: filterParams.usdListed,
     };
 
     return await call('get_tokens_by_collection', params);

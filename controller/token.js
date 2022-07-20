@@ -71,9 +71,9 @@ async function getCollectionDetail(address) {
     }
 }
 
-async function getTokensByCollection(address) {
+async function getTokensByCollection(params) {
     try {
-        return await Moralis.getTokensByCollection(address);
+        return await Moralis.getTokensByCollection(params);
     } catch (err) {
         return null;
     }
