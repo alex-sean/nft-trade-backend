@@ -21,6 +21,7 @@ const {
 } = require('./request/token');
 const TokenController = require('../controller/token');
 const CONST = require('../common/const');
+const { verifyJWT } = require('./base');
 
 function registerRoutes(app) {
     app.post('/token/upload', async (req, res) => {
