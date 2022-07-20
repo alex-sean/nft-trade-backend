@@ -296,7 +296,9 @@ const getPopularCollections = async (from) => {
 
 const getFeaturedCollections = async (collectinParams) => {
     const params = {
-        cateogry: collectinParams.category,
+        category: collectinParams.category,
+        sort: collectinParams.sort,
+        verify: collectinParams.verify,
     };
 
     return await call('get_featured_collections', params);
@@ -307,6 +309,7 @@ const likeToken = async (likeData) => {
         collectionAddress: likeData.collectionAddress,
         tokenID: likeData.tokenID,
         address: likeData.address,
+
     };
 
     return await call('like_token', params);

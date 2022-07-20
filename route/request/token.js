@@ -271,11 +271,27 @@ function getFeaturedCollectionsParams(req) {
         return null;
     }
 
+    if (params.verify === 'true') {
+        params.verify = true;
+    } else if (params.verify === 'false') {
+        params.verify = false;
+    } else {
+        return null;
+    }
+
     return params;
 }
 
 function isValidGetFeaturedCollectionsParams(params) {
     if (params.category === undefined) {
+        return false;
+    }
+
+    if (!params.sort) {
+        return false;
+    }
+
+    if (params.verify === undefined) {
         return false;
     }
 
