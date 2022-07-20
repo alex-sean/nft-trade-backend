@@ -7,6 +7,7 @@ const { registerRoutes: registerTokenRoutes } = require('./token');
 const { registerRoutes: registerSyncRoutes } = require('./sync');
 const { registerRoutes: registerConfigRoutes } = require('./config');
 const { registerRoutes: registerActivityRoutes } = require('./activity');
+const { registerRoutes: registerSubscribeRoutes } = require('./subscribe');
 
 function registerRoutes(app) {
     registerAdminRoutes(app);
@@ -18,6 +19,7 @@ function registerRoutes(app) {
     registerSyncRoutes(app);
     registerConfigRoutes(app);
     registerActivityRoutes(app);
+    registerSubscribeRoutes(app)
 }
 
 module.exports = {
