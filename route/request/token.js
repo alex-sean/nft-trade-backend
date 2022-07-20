@@ -153,11 +153,39 @@ function getTokensByCollectionParams(req) {
         return null;
     }
 
+    if (params.avaxListed === 'true') {
+        params.avaxListed = true;
+    } else if (params.avaxListed === 'false') {
+        params.avaxListed = false;
+    } else {
+        return null;
+    }
+
+    if (params.usdListed === 'true') {
+        params.usdListed = true;
+    } else if (params.usdListed === 'false') {
+        params.usdListed = false;
+    } else {
+        return null;
+    }
+
     return params;
 }
 
 function isValidTokensByCollectionParams(params) {
     if (params.address === undefined) {
+        return false;
+    }
+
+    if (params.avaxListed === undefined) {
+        return false;
+    }
+
+    if (params.usdListed === undefined) {
+        return false;
+    }
+
+    if (params.sort === undefined) {
         return false;
     }
 
