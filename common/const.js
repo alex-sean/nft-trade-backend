@@ -23,17 +23,10 @@ const USER_EXIST_STATUS = {
     EXIST: 1
 };
 
-const MailChimp = {
-    api_key: 'f347e3c49863ad85b76e0e74d69e32ca-us6',
-    audience_id: '4829b77d8f',
-    server_prefix: 'us6',
-}
-
 module.exports = {
     MYSQL_ERR_NO,
     RES_CODE,
     CONTACT_STATUS,
     VERIFY_STATUS,
     USER_EXIST_STATUS,
-    MailChimp,
 }

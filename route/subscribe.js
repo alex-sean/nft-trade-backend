@@ -14,18 +14,23 @@ function registerRoutes(app) {
             }
 
             client.setConfig({
-                apiKey: CONST.MailChimp.api_key,
-                server: CONST.MailChimp.server_prefix,
+                apiKey: process.env.MAILCHIMP_API_KEY,
+                server: process.env.MAILCHIMP_PREFIX,
             });
                 
-            client.lists.addListMember(CONST.MailChimp.audience_id, {
-                email_address : mail_address,
-                status : 'subscribed'
-            }).then((res) => {
-                response({
-                    status: CONST.RES_CODE.SUCCESS,
-                }, res);
-            })
+                client.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
+                    email_address : mail_address,
+                    status : 'subscribed'
+                }).then(ress => {
+                    response({
+                        status: CONST.RES_CODE.SUCCESS,
+                    }, res);
+                }, err => {
+                    response({
+                        status: CONST.RES_CODE.FAILED,
+                        error: err.message
+                    }, res);
+                })
         } catch (err) {
             response({
                 status: CONST.RES_CODE.FAILED,
