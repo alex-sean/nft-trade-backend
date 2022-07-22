@@ -6,7 +6,9 @@ const {
     getUpdateUserParams,
     getUpdateUserStatusParams,
     getUserParams,
-    getUploadBackgroundParams
+    getUploadBackgroundParams,
+    getUserLikeParams,
+    getLikeParams
 } = require('./request/user');
 const { verifyJWT } = require('./base');
 const UserController = require('../controller/user');
@@ -51,6 +53,58 @@ function registerRoutes(app) {
             }
 
             const result = await UserController.getUserList(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+                data: result
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.get('/user/like', async (req, res) => {
+        try {
+            const params = getUserLikeParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await UserController.getUserLike(params);
+            if (!result) {
+                throw new Error('Internal Server Error');
+            }
+
+            response({
+                status: CONST.RES_CODE.SUCCESS,
+                data: result
+            }, res);
+        } catch (err) {
+            response({
+                status: CONST.RES_CODE.FAILED,
+                error: err.message
+            }, res);
+        }
+    })
+
+    app.post('/user/like', async (req, res) => {
+        try {
+            const params = getLikeParams(req);
+
+            if (!params) {
+                responseInvalid(res);
+                return;
+            }
+
+            const result = await UserController.likeUser(params);
             if (!result) {
                 throw new Error('Internal Server Error');
             }

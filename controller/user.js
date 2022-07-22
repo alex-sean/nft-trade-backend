@@ -30,6 +30,14 @@ async function getUserList(params) {
     return await Moralis.getUsers(params);
 }
 
+async function getUserLike(params) {
+    return await Moralis.getUserLike(params);
+}
+
+async function likeUser(params) {
+    return await Moralis.likeUser(params);
+}
+
 async function deleteUser(params) {
     try {
         return await UserModel.deleteById(params.id);
@@ -104,5 +112,7 @@ module.exports = {
     updateUser,
     verifyUser,
     getUser,
-    uploadBackground
+    uploadBackground,
+    getUserLike,
+    likeUser
 }

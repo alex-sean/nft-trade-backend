@@ -203,6 +203,70 @@ function isValidUploadBackgroundParams(params) {
     return true;
 }
 
+function getUserLikeParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidUserLikeParams(params)) {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidUserLikeParams(params) {
+    if (params.address === undefined) {
+        return false;
+    }
+
+    if (params.to === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
+function getLikeParams(req) {
+    let params = Base.getParameterFromRequest(req);
+
+    if (!params) {
+        return null;
+    }
+
+    if (!isValidLikeParams(params)) {
+        return null;
+    }
+
+    if (params.like === 'true') {
+        params.like = true;
+    } else if (params.like === 'false') {
+        params.like = false;
+    } else {
+        return null;
+    }
+
+    return params;
+}
+
+function isValidLikeParams(params) {
+    if (params.address === undefined) {
+        return false;
+    }
+
+    if (params.to === undefined) {
+        return false;
+    }
+
+    if (params.like === undefined) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
     getRegisterUserParams,
     getUserListParams,
@@ -210,5 +274,7 @@ module.exports = {
     getUpdateUserParams,
     getUpdateUserStatusParams,
     getUserParams,
-    getUploadBackgroundParams
+    getUploadBackgroundParams,
+    getUserLikeParams,
+    getLikeParams
 }

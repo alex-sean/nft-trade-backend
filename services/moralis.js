@@ -338,6 +338,25 @@ const getLikeToken = async (likeData) => {
     return await call('get_like_token', params);
 }
 
+const getLikeUser = async (likeData) => {
+    const params = {
+        address: likeData.address,
+        to: likeData.to,
+    };
+
+    return await call('get_like_user', params);
+}
+
+const likeUser = async (likeData) => {
+    const params = {
+        address: likeData.address,
+        to: likeData.to,
+        like: likeData.like
+    };
+
+    return await call('like_user', params);
+}
+
 const getActivities = async (activityParams) => {
     const params = {
         category: activityParams.category,
@@ -456,5 +475,7 @@ module.exports = {
     verifyCollection,
     setFeatured,
     getCollectPrices,
-    getUsers
+    getUsers,
+    getLikeUser,
+    likeUser
 }
