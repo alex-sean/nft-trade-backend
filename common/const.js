@@ -28,5 +28,5 @@ module.exports = {
     RES_CODE,
     CONTACT_STATUS,
     VERIFY_STATUS,
-    USER_EXIST_STATUS
+    USER_EXIST_STATUS,
 }
